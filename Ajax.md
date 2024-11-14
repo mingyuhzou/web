@@ -6,7 +6,7 @@
 
 概念：是浏览器与服务器进行**数据通信**的技术 Ajax具有**异步**特性 可以在**不刷新页面**的情况下**与服务器通信 交换数据 或更新页面**
 
-<img src="assets/image-20241008105638965-1728657719736-1.png" alt="image-20241008105638965" style="zoom:67%;" />
+<img src="assets/image-20241008105638965-1728657719736-1-1731595494593-1.png" alt="image-20241008105638965" style="zoom:67%;" />
 
 
 
@@ -36,9 +36,14 @@
 
 先传入**配置对象** 然后用**then回调函数**接收结果 做**后续处理** 回调函数中的**第一个参数是服务端返回结果**
 
-<img src="assets/image-20241008111505496-1728657719736-2.png" style="zoom:67%;" />
+<img src="assets/image-20241008111505496-1728657719736-2-1731595494593-2.png" style="zoom:67%;" />
 
+也可以简写
 
+```javascript
+axios.post('url地址',{key:'value'})
+axios.get(url,{params:{}})
+```
 
 
 
@@ -50,7 +55,7 @@
 
 统一资源定位符
 
-<img src="assets/image-20241008112057302-1728657719736-3.png" alt="image-20241008112057302" style="zoom:67%;" />
+<img src="assets/image-20241008112057302-1728657719736-3-1731595494593-3.png" alt="image-20241008112057302" style="zoom:67%;" />
 
 
 
@@ -72,13 +77,13 @@
 
 URL中的语法如下：
 
-![image-20241008113007559](assets/image-20241008113007559-1728657719736-4.png)
+![image-20241008113007559](assets/image-20241008113007559-1728657719736-4-1731595494593-5.png)
 
 
 
 在Axios中通过**params设置参数**
 
-<img src="assets/image-20241008113232852-1728657719736-5.png" alt="image-20241008113232852" style="zoom:50%;" />
+<img src="assets/image-20241008113232852-1728657719736-5-1731595494593-4.png" alt="image-20241008113232852" style="zoom:50%;" />
 
 
 
@@ -88,7 +93,7 @@ URL中的语法如下：
 
 form-data是**FormData对象**
 
-![image-20241009172248572](assets/image-20241009172248572.png)
+![image-20241009172248572](assets/image-20241009172248572-1731595494593-6.png)
 
 
 
@@ -108,7 +113,7 @@ path格式是将url传为**格式字符串**
 
 # 请求方式
 
-<img src="assets/image-20241008121431700-1728657719736-6.png" alt="image-20241008121431700" style="zoom:50%;" />
+<img src="assets/image-20241008121431700-1728657719736-6-1731595494593-9.png" alt="image-20241008121431700" style="zoom:50%;" />
 
 
 
@@ -118,7 +123,7 @@ path格式是将url传为**格式字符串**
 
 **method参数指定请求方式 data设置提交的数据**
 
-![image-20241008122947469](assets/image-20241008122947469-1728657719736-7.png)
+![image-20241008122947469](assets/image-20241008122947469-1728657719736-7-1731595494593-7.png)
 
 data中可以简写——**只写一个键名表示值的变量名与键相同** 
 
@@ -130,19 +135,19 @@ data中可以简写——**只写一个键名表示值的变量名与键相同**
 
 
 
-<img src="assets/image-20241008123227541-1728657719737-8.png" alt="image-20241008123227541" style="zoom:50%;" />
+<img src="assets/image-20241008123227541-1728657719737-8-1731595494593-8.png" alt="image-20241008123227541" style="zoom:50%;" />
 
 
 
 error对象
 
-![image-20241008123902318](assets/image-20241008123902318-1728657719737-9.png)
+![image-20241008123902318](assets/image-20241008123902318-1728657719737-9-1731595494593-10.png)
 
 
 
 其中response对象下的data中的**message**可以得到详细的错误信息
 
-![image-20241008123957710](assets/image-20241008123957710-1728657719737-10.png)
+![image-20241008123957710](assets/image-20241008123957710-1728657719737-10-1731595494593-12.png)
 
 
 
@@ -156,7 +161,7 @@ error对象
 
 **报文在网络XHR下的标头和负载可以找到** 
 
-<img src="assets/image-20241008125232841-1728657719737-11.png" alt="image-20241008125232841" style="zoom: 50%;" />
+<img src="assets/image-20241008125232841-1728657719737-11-1731595494593-11.png" alt="image-20241008125232841" style="zoom: 50%;" />
 
 
 
@@ -166,13 +171,13 @@ error对象
 
 + 请求行：**请求方法 URL 协议**
 
-![image-20241008124614561](assets/image-20241008124614561-1728657719737-12.png)
+![image-20241008124614561](assets/image-20241008124614561-1728657719737-12-1731595494599-15.png)
 
 
 
 + 请求头：**以键值对信息携带的附加信息** content-type比较重要
 
-<img src="assets/image-20241008124637256-1728657719738-15.png" alt="image-20241008124637256" style="zoom: 50%;" />
+<img src="assets/image-20241008124637256-1728657719738-15-1731595494599-13.png" alt="image-20241008124637256" style="zoom: 50%;" />
 
 + 空行：**分隔请求头 其之后是发送给服务器的资源**
 
@@ -201,13 +206,13 @@ error对象
 
 响应体在响应中 左侧的**预览**将响应体转换为**对象格式**方便查看
 
-<img src="assets/image-20241008190956557-1728657719737-13.png" alt="image-20241008190956557" style="zoom:50%;" />
+<img src="assets/image-20241008190956557-1728657719737-13-1731595494599-19.png" alt="image-20241008190956557" style="zoom:50%;" />
 
 
 
 状态码 用来表示**本次请求是否成功完成 **比如404——服务器找不到资源
 
-<img src="assets/image-20241008191319353-1728657719737-14.png" alt="image-20241008191319353" style="zoom:50%;" />
+<img src="assets/image-20241008191319353-1728657719737-14-1731595494599-22.png" alt="image-20241008191319353" style="zoom:50%;" />
 
 
 
@@ -215,7 +220,7 @@ error对象
 
 # form-serialize插件
 
- 该插件可以**快速得到表单值**
+该插件可以**快速得到表单值**
 
 
 
@@ -318,7 +323,7 @@ modal.hide()
 
 # 图书管理系统
 
-![image-20241009155717759](assets/image-20241009155717759.png)
+![image-20241009155717759](assets/image-20241009155717759-1731595494599-20.png)
 
 
 
@@ -480,7 +485,7 @@ edit_btn?.addEventListener('click', function () {
 
 # 修改个人信息
 
-<img src="assets/image-20241009173849374.png" alt="image-20241009173849374" style="zoom:50%;" />
+<img src="assets/image-20241009173849374-1731595494599-16.png" alt="image-20241009173849374" style="zoom:50%;" />
 
 
 
@@ -575,15 +580,15 @@ user_form?.addEventListener('submit', function () {
 
 xhr的**查询参数**通过用url的**格式字符串**完成，但是一个个拼接参数比较麻烦，这里可以使用**URLSearchParams**对象，该对象使用**一个对象**作为参数来实例化，调用toString方法就可以得到拼接好的参数了
 
-<img src="assets/image-20241010083744443.png" alt="image-20241010083744443" style="zoom:50%;" />
+<img src="assets/image-20241010083744443-1731595494599-14.png" alt="image-20241010083744443" style="zoom:50%;" />
 
-<img src="assets/image-20241010083836423.png" alt="image-20241010083836423" style="zoom:67%;" />
-
-
+<img src="assets/image-20241010083836423-1731595494599-18.png" alt="image-20241010083836423" style="zoom:67%;" />
 
 
 
-<img src="assets/image-20241010084357645.png" alt="image-20241010084357645" style="zoom:50%;" />
+
+
+<img src="assets/image-20241010084357645-1731595494599-17.png" alt="image-20241010084357645" style="zoom:50%;" />
 
 
 
@@ -595,13 +600,13 @@ xhr的**查询参数**通过用url的**格式字符串**完成，但是一个个
 
 请求需要设置请求格式——**xhr.setRequestHeader()**，再准备**JSON数据**在发送请求的时候作为**参数**
 
-<img src="assets/image-20241010084518884.png" alt="image-20241010084518884" style="zoom:67%;" />
+<img src="assets/image-20241010084518884-1731595494599-28.png" alt="image-20241010084518884" style="zoom:67%;" />
 
 ​	
 
 # Promise
 
-![image-20241010091445768](assets/image-20241010091445768.png)
+![image-20241010091445768](assets/image-20241010091445768-1731595494599-29.png)
 
 注意回调函数只能接受**一个参数** 多个参数用**数组包裹**
 
@@ -609,7 +614,7 @@ xhr的**查询参数**通过用url的**格式字符串**完成，但是一个个
 
 三种状态 一旦从**pending修改为fulfiled或者rejected(状态凝固)后就不会再改变了**，简言之一旦执行了reject就无法执行reslvoe 反之也一样。
 
-<img src="assets/image-20241010092703365.png" alt="image-20241010092703365" style="zoom:50%;" />
+<img src="assets/image-20241010092703365-1731595494599-25.png" alt="image-20241010092703365" style="zoom:50%;" />
 
 
 
@@ -718,7 +723,7 @@ myAxios({
 
 依靠then方法返回**一个新生成的Promise对象**特性，继续串联下一环任务直到结束
 
-![image-20241011161456945](assets/image-20241011161456945.png)
+![image-20241011161456945](assets/image-20241011161456945-1731595494599-21.png)
 
 
 
@@ -775,7 +780,7 @@ myAxios({
 
 **可以使用一种更简洁的方式写出基于promise的异步行为**，将两个关键字——await关键字**取代then**函数**等待获取**promise对象**成功状态**的结果值，async声明函数是异步的。await关键字必须有外部的async才能使用，且必须是外层不能是次外层。
 
-​	![image-20241011203150895](assets/image-20241011203150895.png)
+​	![image-20241011203150895](assets/image-20241011203150895-1731595494599-24.png)
 
 
 
@@ -829,13 +834,13 @@ myAxios({
 
 
 
-<img src="assets/image-20241011175257747.png" alt="image-20241011175257747" style="zoom:50%;" />
+<img src="assets/image-20241011175257747-1731595494599-23.png" alt="image-20241011175257747" style="zoom:50%;" />
 
 
 
 + 微任务：由**JS引擎**执行的异步代码 Promise本身是同步的但是它的then和catch是异步的
 
-<img src="assets/image-20241011175308093.png" alt="image-20241011175308093" style="zoom:50%;" />
+<img src="assets/image-20241011175308093-1731595494599-26.png" alt="image-20241011175308093" style="zoom:50%;" />
 
 
 
@@ -843,7 +848,7 @@ myAxios({
 
 
 
-<img src="assets/image-20241011175458037.png" alt="image-20241011175458037" style="zoom:50%;" />
+<img src="assets/image-20241011175458037-1731595494599-27.png" alt="image-20241011175458037" style="zoom:50%;" />
 
 
 
@@ -861,11 +866,11 @@ myAxios({
 
 **合并多个Promise对象**等待所有对象**同时完成**(或某一个失败)，做后续逻辑
 
-<img src="assets/image-20241011181245595.png" alt="image-20241011181245595" style="zoom:67%;" />
+<img src="assets/image-20241011181245595-1731595494599-30.png" alt="image-20241011181245595" style="zoom:67%;" />
 
 
 
-<img src="assets/image-20241011181340534.png" alt="image-20241011181340534" style="zoom:50%;" />
+<img src="assets/image-20241011181340534-1731595494599-31.png" alt="image-20241011181340534" style="zoom:50%;" />
 
 
 
@@ -903,4 +908,86 @@ Axios返回的是一个Promise对象
     })
   </script>
 ```
+
+
+
+# axios基地址
+
+相当于给所有的网页地址添加一个公共前缀
+
+<img src="assets/image-20241015130026289-1731595494599-32.png" alt="image-20241015130026289" style="zoom:50%;" />
+
+
+
+
+
+一般在common.js中写入**axios.defaults.baseURL='xxx'**
+
+
+
+# JWT
+
+JSON web Token是目前最为流行的跨域解决方案
+
+在使用JWT身份验证中，当用户使用其凭证成功登录时，将返回**JSON Web Token令牌**，当用户访问接口时有token才能访问页面
+
+
+
+# axios拦截器
+
+请求发送之前(一般用于添加token)，返回回来之后(一般用于验证token失效，剥离数据)执行的一些**公共**的逻辑。
+
+**注意不要删除返回值**
+
+```javascript
+// 添加请求拦截器 config是请求的参数
+axios.interceptors.request.use(config => {
+    const token = localStorage.getItem('usermsg') ? JSON.parse(localStorage.getItem('usermsg')).token : ''
+    if (token) {
+        config.headers['Authorization'] = JSON.parse(localStorage.getItem('usermsg')).token
+    }
+    return config
+}, error => {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+});
+
+// 添加响应拦截器 respons是包装的响应
+axios.interceptors.response.use(response => {
+    // 2xx 范围内的状态码都会触发该函数。
+    // 对响应数据做点什么
+    console.log(response);
+	// 在axios介绍的数据就是这里返回的数据，这里直接返回res.data就是做了数据剥离
+    return response.data
+}, err => {
+    // 超出 2xx 范围的状态码都会触发该函数。
+    // 对响应错误做点什么
+
+    if (err.response.status === 401) {
+        showToast('登录失效')
+        localStorage.removeItem('usermsg')
+        setTimeout(() => {
+            location.href = './login.html'
+        }, 1500);
+    }
+
+    return Promise.reject(err);
+});
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

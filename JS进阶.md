@@ -2,7 +2,7 @@
 
 JS是一种运行在客户端的编程语言，实现人机交互的效果，可以实现网络特效，验证表单的合法性，服务端编程，数据交互。
 
-<img src="./asserts/image-20240927170406494.png" alt="image-20240927170406494" style="zoom: 67%;" />
+<img src="assets/image-20240927170406494.png" alt="image-20240927170406494" style="zoom: 67%;" />
 
 
 
@@ -12,19 +12,19 @@ JS是一种运行在客户端的编程语言，实现人机交互的效果，可
 
 JS需要用script包裹，写在**body**标签的**最下面**，因为JS是解释型语言必须先有html内容才能使用。
 
-![image-20240927171647410](./asserts/image-20240927171647410.png)
+![image-20240927171647410](assets/image-20240927171647410.png)
 
 
 
 JS也可以写到外部
 
-<img src="./asserts/image-20240927171919683.png" alt="image-20240927171919683" style="zoom:50%;" />
+<img src="assets/image-20240927171919683.png" alt="image-20240927171919683" style="zoom:50%;" />
 
 
 
 外部的写法
 
-<img src="./asserts/image-20240927172526545.png" alt="image-20240927172526545" style="zoom:67%;" />
+<img src="assets/image-20240927172526545.png" alt="image-20240927172526545" style="zoom:67%;" />
 
 
 
@@ -34,7 +34,7 @@ JS也可以写到外部
 
 ## 注释和结束符
 
-![image-20240927172637520](./asserts/image-20240927172637520.png)
+![image-20240927172637520](assets/image-20240927172637520.png)
 
 结束符使用**;**，但是可以**省略**，**一般不写**。
 
@@ -46,7 +46,7 @@ JS也可以写到外部
 
 输出
 
-![image-20240927173630433](./asserts/image-20240927173630433.png)
+![image-20240927173630433](assets/image-20240927173630433.png)
 
 console.dir()可以详细的输出对象
 
@@ -58,7 +58,7 @@ console.dir()可以详细的输出对象
 
 输入
 
-<img src="./asserts/image-20240927174053778.png" alt="image-20240927174053778" style="zoom:50%;" />
+<img src="assets/image-20240927174053778.png" alt="image-20240927174053778" style="zoom:50%;" />
 
 
 
@@ -70,7 +70,7 @@ alert和prompt会跳过页面渲染**先被执行**
 
 ## 检验数据类型
 
-![image-20240927203231189](./asserts/image-20240927203231189.png)
+![image-20240927203231189](assets/image-20240927203231189.png)
 
 
 
@@ -102,6 +102,7 @@ Number.toFixed(2) // 指定保留小数的位数四舍五入 默认为0
 // 格式化字符串使用反引号包裹在其中用${}包裹所需内容
 document.write(`我是一个${age}岁的孩子`)
 
+Number.isInteger(x) //判断参数是否是整数，返回布尔值
 ```
 
 
@@ -110,7 +111,7 @@ document.write(`我是一个${age}岁的孩子`)
 
 `null` 是一个**对象**，表示“无值”。
 
-Boolean()可以转换为布尔值<img src="./asserts/image-20240928220419311.png" alt="image-20240928220419311" style="zoom:50%;" />
+Boolean()可以转换为布尔值<img src="assets/image-20240928220419311.png" alt="image-20240928220419311" style="zoom:50%;" />
 
 小数计算有精度误差，可以先转换为整数计算
 
@@ -151,7 +152,7 @@ console.log(str.trim());
 split(separator)分割字符串
 
 ```javascript
-console.log(str.split(", ")); 
+console.log(str.split(",")); 
 ```
 
 
@@ -209,7 +210,13 @@ console.log(str.includes("world"，5));
 
 
 
+## 进制数
 
+```python
+0o10101 // 八进制使用0o打头
+ox10101 // 十六进制使用0x
+ob111 //二进制0b打头
+```
 
 
 
@@ -229,11 +236,20 @@ arr.unshift(0); // 开头添加
 arr.pop();// 弹出尾部
 arr.shift();// 删除第一个元素
 arr.splice(4,1)// 删除从index开始的n个元素
-let index = arr.indexOf(3);// 查找元素索引
+arr.splice(0,1,'xxxx') // 效果等同于替换第一个
+
+let index = arr.indexOf(3);// 查找元素索引 如果不存在则返回-1
 let exists = arr.includes(10);// 查找是否存在
 
 // JS中数组的排序是默认按照字典序的 对数字数组需要定义比较函数
 arr.sort((a,b)=> a-b)
+const arr = [
+    { name: 'item1', price: 100 },
+    { name: 'item2', price: 200 },
+    { name: 'item3', price: 150 }
+];
+// 按照价格从低到高排序
+arr.sort((a, b) => a.price - b.price);
 
 // 翻转数组
 arr.reverse()
@@ -262,17 +278,63 @@ const newarr=arr.map(function(ele,index){
 // join组合数组为字符串 默认为逗号分隔
 arr.join('')
 
-// 效果同python 初始值可以省略  如果有初始值则将初始值作为上一次结果从数组首部开始执行 如果省略则从数组第二个值开始 注意除非是基础的运算(+-*|&)且数据就是数值类型 否则省略初始值都会导致少计算数组首部
-arr.reduce(function(上一次结果,当前对象){
-   return 运算逻辑——类似pre+curr.salary
-},初始值)
+```
+
+```python
+修改器方法：
+push()
+pop()
+shift()
+unshift()
+splice()
+sort()
+reverse()
+
+访问器方法：
+concat()
+join()
+slice()
+forEach()
+filter()
+map()
+every()
+some()
+reduce()
+reduceRight()
+indexOf()
+lastIndexOf()
+find()				返回第一个满足条件的元素，参数是回调函数
+findIndex()			返回第一个满足条件的元素的索引，参数是回调函数
 ```
 
 
 
 
 
-展开运算符
+
+
+## Array转换方法
+
+
+
+```
+Array.of()			创建新的数组，参数作为数组中的元素
+Array.from()		将可遍历对象或伪数组转为纯数组
+```
+
+
+
+JS中存在一些伪数组即具有数组特性，但并不是真正数组的对象，比如 **document.querySelectorAll()**返回的结果和arguments，伪数组无法使用数组的**方法**，可以将其转换为**真数组对象**然后使用相应的方法
+
+```javascript
+const argsArray = Array.from(arguments);
+```
+
+
+
+
+
+## 扩展运算符
 
  **...arr**等价于python中的**解包**
 
@@ -284,13 +346,13 @@ const new_arr=[...arr].sort((a,b)=> a-b) // sorted()的效果
 
 
 
+除了可以展开数组之外还能将可遍历对象转换为逗号分隔的参数序列
 
-
-JS中存在一些伪数组即具有数组特性，但并不是真正数组的对象，比如 document.querySelectorAll()返回的结果和arguments，伪数组无法使用数组的**方法**，可以将其转换为**真数组对象**然后使用相应的方法
-
-```javascript
-const argsArray = Array.from(arguments);
+```python
+const arr05 = [...'Hello World'];
 ```
+
+
 
 
 
@@ -304,7 +366,7 @@ const argsArray = Array.from(arguments);
 
 **除了+以外的其他算术运算符会把字符串转换为数值类型**
 
-​	<img src="./asserts/image-20240927203746419.png" alt="image-20240927203746419" style="zoom:67%;" />
+​	<img src="assets/image-20240927203746419.png" alt="image-20240927203746419" style="zoom:67%;" />
 
 
 
@@ -339,7 +401,7 @@ document.write(parseFloat('abc12px')) // 同时保留小数 可以识别数字�
 
 ## 逻辑运算符
 
-![image-20240927215149876](./asserts/image-20240927215149876.png)
+![image-20240927215149876](assets/image-20240927215149876.png)
 
 注意&&的优先级更**高**
 
@@ -363,11 +425,22 @@ document.write(parseFloat('abc12px')) // 同时保留小数 可以识别数字�
 
 
 
+## 二元运算符
+
+如果第一个结果不为null或undefined则取第一个，反之取第二个，有**短路**的特性
+
+```js
+0 ?? 100;   // 0
+false ?? 100; // false
+null ?? 100; // 100
+undefined ?? 100;  // 100
+```
+
 
 
 ##  流程控制
 
-![image-20240928173340368](./asserts/image-20240928173340368.png)
+![image-20240928173340368](assets/image-20240928173340368.png)
 
 
 
@@ -375,7 +448,7 @@ document.write(parseFloat('abc12px')) // 同时保留小数 可以识别数字�
 
 ​	
 
-![](./asserts/image-20240928223338977.png)
+![](assets/image-20240928223338977.png)
 
 
 
@@ -393,9 +466,15 @@ document.write(parseFloat('abc12px')) // 同时保留小数 可以识别数字�
 
 匿名函数
 
-<img src="./asserts/image-20240928212545425.png" alt="image-20240928212545425" style="zoom:67%;" />
+<img src="assets/image-20240928212545425.png" alt="image-20240928212545425" style="zoom:67%;" />
 
+参数默认值
 
+```python
+function 函数名(参数1，参数2=默认值) {
+    
+}
+```
 
 
 
@@ -403,7 +482,7 @@ document.write(parseFloat('abc12px')) // 同时保留小数 可以识别数字�
 
 立即执行函数，先写**两个小括号**，前面的括号包裹函数，后面的函数包裹参数表示调用，注意必须加**;**	
 
-![image-20240928212748607](./asserts/image-20240928212748607.png)
+![image-20240928212748607](assets/image-20240928212748607.png)
 
 
 
@@ -411,7 +490,15 @@ document.write(parseFloat('abc12px')) // 同时保留小数 可以识别数字�
 
 动态参数——**arguments是函数内置的伪数组变量，它包含了调用函数时传入的所有实参** 使用argument时函数可以不定义参数
 
-剩余参数——**function get(X1,X2,...参数名)** 可以将一个**不定数量的参数表示为一个数组** 该数组是一个真数组 剩余参数要写到**最末** 前置**...** 使用时**忽略前缀**
+剩余参数(rest)——**function get(X1,X2,...参数名)** 可以将一个**不定数量的参数表示为一个数组** 该数组是一个真数组 剩余参数要写到**最末** 前置**...** 使用时**忽略前缀**
+
+```python
+function fn02(name, age, ...data) {
+    console.log(name);
+    console.log(age);
+    console.log('rest参数：', data);  // ['司马姥姥', '欧阳姥姥', '爱新觉罗姥姥']
+}
+```
 
 
 
@@ -444,13 +531,13 @@ form.addEventListener('submit',ex=>ex.preventDefault()) // 阻止表单的默认
 
 箭头函数的**this指向window** 因为对于obj他是通过window调用的 所以obj的this是指向window的
 
-<img src="./asserts/image-20241006122827731.png" alt="image-20241006122827731" style="zoom:50%;" />
+<img src="assets/image-20241006122827731.png" alt="image-20241006122827731" style="zoom:50%;" />
 
 
 
 箭头函数的**this指向obj** 因为sayHi是由obj调用的 sayHi的this指向obj
 
-<img src="./asserts/image-20241006123003567.png" alt="image-20241006123003567" style="zoom:50%;" />
+<img src="assets/image-20241006123003567.png" alt="image-20241006123003567" style="zoom:50%;" />
 
 
 
@@ -458,7 +545,20 @@ form.addEventListener('submit',ex=>ex.preventDefault()) // 阻止表单的默认
 
 
 
+## set
 
+```js
+const s2 = new Set([100,200,200,200,300,400,400,500, {name:'xiaole'},{name:'xiaole'}]);
+size
+add()
+delete()
+has()
+clear()
+keys()
+values()
+entries()
+forEach()
+```
 
 
 
@@ -470,9 +570,17 @@ form.addEventListener('submit',ex=>ex.preventDefault()) // 阻止表单的默认
 
 ## 对象
 
-对象的定义可以使用字面量类似**字典**，属性之间使用**逗号**隔开
+对象的定义可以使用字面量类似**字典**，属性之间使用**逗号**隔开 注意属性可以用**变量赋值**，但是变量**修改后**对象的值是**不会变**的
 
-![](./asserts/image-20240928222149124.png)
+![](assets/image-20240928222149124.png)
+
+
+
+**obj.new_atrtribute=xxx 添加属性**
+
+**delete obj.attribute   删除属性**
+
+
 
 
 
@@ -486,21 +594,19 @@ for (let k in user){
 
 
 
-使用静态方法**Object.keys(obj)**可以以**数组**形式获得对象的所有**键**   **Object.values(obj)**获得对象所有的值**Object.assign(new_obj,obj)** 深拷贝对象 第一个参数是接收者 注意这里实际上是**合并而不是覆盖** 有的时候会通过**Object(obj).foreach(item=>{})**来遍历对象，这里需要注意不能使用**Obj.item** ，因为item是字符串
+**Object.keys(obj)**可以以**数组**形式获得对象的所有**键**  
+
+**Object.values(obj)**获得对象所有的值
+
+**Object.assign(new_obj,obj)** 深拷贝对象 第一个参数是接收者 注意这里实际上是**合并而不是覆盖** 
+
+**Object(obj).foreach(item=>{})**遍历对象，这里需要注意不能使用**Obj.item** ，因为item是字符串
 
 
 
 
 
-
-
-或者使用**new Object({name:'pink})**
-
-
-
-
-
-可以使用构造函数创建对象 构造函数约定上函数名**首字母大写**    使用**new**调用  内部的属性用**this**定义 
+可以使用构造函数创建对象 约定上函数名**首字母大写**    使用**new**调用  内部的属性用**this**定义 
 
 构造函数执行过程：**new 首先可以创建一个空对象，构造函数中的this会指向这个对象，然后执行构造函数的代码最后返回新对象**
 
@@ -520,17 +626,6 @@ JS中的构造函数会浪费内存 因为同样的方法会重复许多份
 
 
 
-**构造函数**的属性和方法称为**静态成员（区别于实例对象的实例成员）**，静态成员只能通过**构造函数**调用 静态方法中的**this指向构造函数**
-
-```javascript
-Pig.eyes=2 // 静态属性
-console.log(pig.eyes)
-```
-
-
-
-
-
 ## FormData对象
 
 一个内置对象，用于以键值对的形式构建数据
@@ -543,15 +638,13 @@ fd.append('age', '25'); // 添加年龄
 
 
 
-## 常见数学内置对象
+## 数学对象
 
-<img src="./asserts/image-20240928224303611.png" style="zoom:67%;" />
-
-
-
-<img src="./asserts/image-20240928224320672.png" alt="image-20240928224320672" style="zoom:67%;" />
+<img src="assets/image-20240928224303611.png" style="zoom:67%;" />
 
 
+
+<img src="assets/image-20240928224320672.png" alt="image-20240928224320672" style="zoom:67%;" />
 
 
 
@@ -559,7 +652,9 @@ fd.append('age', '25'); // 添加年龄
 
 
 
-![image-20240928224508744](./asserts/image-20240928224508744.png) 
+
+
+![image-20240928224508744](assets/image-20240928224508744.png) 
 
 想要在数组中随机取数可以直接乘上**数组的长度**
 
@@ -591,7 +686,7 @@ DOM文档对象，浏览器提供的专门用来**操作网页内容**的功能
 
 DOM树，将html文档以**树状结构**直观的表现出来 
 
-<img src="./asserts/image-20240929162755385.png" alt="image-20240929162755385" style="zoom: 67%;" />
+<img src="assets/image-20240929162755385.png" alt="image-20240929162755385" style="zoom: 67%;" />
 
 
 
@@ -636,13 +731,13 @@ innerHTML会**识别标签**
 
 常见属性，标签自带的属性如herf
 
-![image-20240929172318030](./asserts/image-20240929172318030.png)
+![image-20240929172318030](assets/image-20240929172318030.png)
 
 
 
 样式属性 注意**值**需是**字符串形式** 对于top,left等属性不要给数值 要形如1**0+'px'**
 
-![image-20240929174302693](./asserts/image-20240929174302693.png)
+![image-20240929174302693](assets/image-20240929174302693.png)
 
 
 
@@ -652,7 +747,7 @@ innerHTML会**识别标签**
 
 当要修改的属性较多时，可以通过给对象一个**类名**来应用**该类设置的属性**，注意这里是**覆盖操作**，如果想要保留之前的类需要带上**原先的类名**，类名不需要**加.修饰**
 
-![image-20240929180828744](./asserts/image-20240929180828744.png)
+![image-20240929180828744](assets/image-20240929180828744.png)
 
 
 
@@ -660,7 +755,7 @@ innerHTML会**识别标签**
 
 常用的方法是classList**追加和删除类名**，切换操作指的是如果该类**存在则删除反之添加** 使用**引号**包裹 不需要**.做前缀** **classList.contains()可以判断是否包含某个类**	
 
-<img src="./asserts/image-20240929181422059.png" alt="image-20240929181422059" style="zoom:50%;" />
+<img src="assets/image-20240929181422059.png" alt="image-20240929181422059" style="zoom:50%;" />
 
 
 
@@ -684,13 +779,13 @@ innerHTML会**识别标签**
 
 通过对象的**dataset属性**可以得到所有的自定义属性的**集合**，对这个集合可以使用**.调用**每一个自定义属性
 
-![image-20240929204339256](./asserts/image-20240929204339256.png)
+![image-20240929204339256](assets/image-20240929204339256.png)
 
 
 
 自定义属性可以连接nav和content，在操作nav时能找到对应的content
 
-<img src="./asserts/image-20241002170020292.png" alt="image-20241002170020292" style="zoom:50%;" />
+<img src="assets/image-20241002170020292.png" alt="image-20241002170020292" style="zoom:50%;" />
 
 
 
@@ -704,17 +799,17 @@ innerHTML会**识别标签**
 
 每个一段时间调用指定的函数，间隔时间的单位是**毫秒**，会返回一个**id数字**，实际上是定时器的序号**独一无二**
 
-<img src="./asserts/image-20240929205015125.png" alt="image-20240929205015125" style="zoom:67%;" />
+<img src="assets/image-20240929205015125.png" alt="image-20240929205015125" style="zoom:67%;" />
 
 
 
-<img src="./asserts/image-20240929205315526.png" alt="image-20240929205315526" style="zoom:67%;" />
+<img src="assets/image-20240929205315526.png" alt="image-20240929205315526" style="zoom:67%;" />
 
 
 
 将定时器的序号给**clearInterval()可以关闭定时器**，一般在指定的函数内部判断**退出条件成立**时执行。
 
-<img src="./asserts/image-20240929214718159.png" alt="image-20240929214718159" style="zoom:67%;" />
+<img src="assets/image-20240929214718159.png" alt="image-20240929214718159" style="zoom:67%;" />
 
 
 
@@ -732,13 +827,13 @@ innerHTML会**识别标签**
 
 第一个参数为**事件类型**，第二个参数为**要执行的函数**，绑定的事件需要使用**引号包裹**
 
-![image-20240930141131028](./asserts/image-20240930141131028.png)
+![image-20240930141131028](assets/image-20240930141131028.png)
 
 
 
 如果使用的函数不是匿名函数且包含参数
 
-![image-20241005112706101](./asserts/image-20241005112706101.png)
+![image-20241005112706101](assets/image-20241005112706101.png)
 
 
 
@@ -751,11 +846,11 @@ innerHTML会**识别标签**
 + 键盘事件：**keydown键盘按下触发，keyup键盘抬起触发** 可以调用**e.target.key**判断按下的键是什么
 + 页面加载事件：**外部资源加载完毕时**触发的事件，给**window对象添加load**事件等待页面所有资源加载完毕，**DOMContentLoaded**事件在**html**加载完毕后触发，**无需等待样式表**，用于实现在样式没加载出来时也能执行功能，给**document**绑定，回调函数用于**绑定事件**
 
-<img src="./asserts/image-20241002172907937.png" alt="image-20241002172907937" style="zoom:50%;" />
+<img src="assets/image-20241002172907937.png" alt="image-20241002172907937" style="zoom:50%;" />
 
 + 页面滚动事件：**scroll**只要滚动一像素就会触发，一般给**window**添加，通过对象的**scrollTop和scrollLeft**可以得到**滚动的距离**，window需要得到整个页面的滚动距离，**需要调用HTML对象**即**document.documentElement**来得到两个属性，注意两个属性**不带单位**，并且是可以**读写**（能手动修改）
 
-<img src="./asserts/image-20241002173840754.png" alt="image-20241002173840754" style="zoom:50%;" />
+<img src="assets/image-20241002173840754.png" alt="image-20241002173840754" style="zoom:50%;" />
 
 + 页面尺寸事件：resize会在**窗口尺寸改变时**触发事件
 + 视频/音频：timeupdate 视频/音频**播放位置**发生改变时触发 loadeddata **刚打开页面时触发**
@@ -796,7 +891,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 事件对象，存储事件触发时的相关信息，**可以判断用户按下了那个键以及鼠标点击了那个属性**。对象绑定函数的**第一个参数**就是事件对象。
 
-![image-20240930212741460](./asserts/image-20240930212741460.png)
+![image-20240930212741460](assets/image-20240930212741460.png)
 
 
 
@@ -818,7 +913,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 事件流，事件完整执行过程中的流动路径（**捕获阶段**从大到小 **冒泡阶段**从小到大）
 
-<img src="./asserts/image-20241002154244116.png" alt="image-20241002154244116" style="zoom:50%;" />
+<img src="assets/image-20241002154244116.png" alt="image-20241002154244116" style="zoom:50%;" />
 
 
 
@@ -828,19 +923,19 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 事件捕获——**从DOM根元素开始去执行对应的事件**，一个简单的例子，子盒子和父盒子都绑定了点击事件，当点击子盒子时**会先执行父盒子的绑定事件**，事件捕获需要相应的代码才能看到效果，使用较少
 
-<img src="./asserts/image-20241002155256588.png" alt="image-20241002155256588" style="zoom:50%;" />
+<img src="assets/image-20241002155256588.png" alt="image-20241002155256588" style="zoom:50%;" />
 
 
 
 事件冒泡——当一个事件触发时，**同样的事件会依次在所有的祖先元素中触发（绑定了相同的事件）**，冒泡是**默认存在**的
 
-阻止冒泡——将事件**限制在当前元素**中<img src="./asserts/image-20241002160104063.png" alt="image-20241002160104063" style="zoom:67%;" />，该函数既能阻止冒泡也能阻止传播
+阻止冒泡——将事件**限制在当前元素**中<img src="assets/image-20241002160104063.png" alt="image-20241002160104063" style="zoom:67%;" />，该函数既能阻止冒泡也能阻止传播
 
 
 
 解绑事件 注意匿名函数无法解绑
 
-![image-20241002160507078](./asserts/image-20241002160507078.png)
+![image-20241002160507078](assets/image-20241002160507078.png)
 
 
 
@@ -850,7 +945,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 如需要对每个li绑定一个事件，使用循环比较费事，这里选择给**父元素注册事件**，**当触发子元素时会冒泡到父元素上**。
 
-![image-20241002161353438](./asserts/image-20241002161353438.png)
+![image-20241002161353438](assets/image-20241002161353438.png)
 
 
 
@@ -858,7 +953,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 利用事件对象可以**有选择性的触发事件**，这里的tagName表示标签的名字注意**大写**
 
-![image-20241002162608394](./asserts/image-20241002162608394.png)
+![image-20241002162608394](assets/image-20241002162608394.png)
 
 
 
@@ -868,7 +963,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 比如阻止**链接跳转或者表单跳转**
 
-<img src="./asserts/image-20241002170133266.png" alt="image-20241002170133266" style="zoom:50%;" />
+<img src="assets/image-20241002170133266.png" alt="image-20241002170133266" style="zoom:50%;" />
 
 
 
@@ -878,7 +973,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 获得当前时间
 
-<img src="./asserts/image-20241003144418140.png" alt="image-20241003144418140" style="zoom:50%;" />
+<img src="assets/image-20241003144418140.png" alt="image-20241003144418140" style="zoom:50%;" />
 
 
 
@@ -886,13 +981,13 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 日期对象方法 注意月份返回的结果**需要加一**，星期以**星期天为0**
 
-<img src="./asserts/image-20241003143254427.png" alt="image-20241003143254427" style="zoom:50%;" />
+<img src="assets/image-20241003143254427.png" alt="image-20241003143254427" style="zoom:50%;" />
 
 
 
 此外还有三个函数返回格式化的日期
 
-![](./asserts/image-20241003145836232.png)
+![](assets/image-20241003145836232.png)
 
 
 
@@ -909,7 +1004,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 从时间戳到具体时间 注意时间戳相减得到的是**毫秒**，需要先除1000
 
-![image-20241003151201046](./asserts/image-20241003151201046.png)
+![image-20241003151201046](assets/image-20241003151201046.png)
 
 
 
@@ -919,7 +1014,7 @@ JS所做的变化也可以使用**transition**设置过度效果。
 
 DOM节点：DOM树中每一个**内容**都称之为节点，节点类型包括——**元素节点**(body div html是根节点) **属性节点**所有的属性 **文本节点**所有的文本
 
-<img src="./asserts/image-20241003154111923.png" alt="image-20241003154111923" style="zoom:67%;" />
+<img src="assets/image-20241003154111923.png" alt="image-20241003154111923" style="zoom:67%;" />
 
 
 
@@ -943,7 +1038,7 @@ DOM节点：DOM树中每一个**内容**都称之为节点，节点类型包括�
 
 克隆节点 参数为布尔值 **true表示同时克隆子孙节点 false表示克隆时忽略节点内部内容** 克隆的结果需要**保存**
 
-<img src="./asserts/image-20241004112220992.png" alt="image-20241004112220992" style="zoom:50%;" />
+<img src="assets/image-20241004112220992.png" alt="image-20241004112220992" style="zoom:50%;" />
 
 
 
@@ -957,7 +1052,7 @@ DOM节点：DOM树中每一个**内容**都称之为节点，节点类型包括�
 
 即移动端常见事件
 
-<img src="./asserts/image-20241004113538851.png" alt="image-20241004113538851" style="zoom:67%;" />
+<img src="assets/image-20241004113538851.png" alt="image-20241004113538851" style="zoom:67%;" />
 
 
 
@@ -971,23 +1066,23 @@ DOM节点：DOM树中每一个**内容**都称之为节点，节点类型包括�
 
 + 首先加载插件，需要用到的文件有swiper-bundle.min.js和swiper-bundle.min.css文件
 
-<img src="./asserts/image-20241004120809100.png" alt="image-20241004120809100" style="zoom:50%;" />
+<img src="assets/image-20241004120809100.png" alt="image-20241004120809100" style="zoom:50%;" />
 
 
 
 + 添加HTML内容
 
-<img src="./asserts/image-20241004120825461.png" alt="image-20241004120825461" style="zoom:50%;" />
+<img src="assets/image-20241004120825461.png" alt="image-20241004120825461" style="zoom:50%;" />
 
 
 
 + 可能想要给Swiper定义一个大小
 
-![image-20241004120845660](./asserts/image-20241004120845660.png)
+![image-20241004120845660](assets/image-20241004120845660.png)
 
 + 初始化Swiper
 
-<img src="./asserts/image-20241004120908889.png" alt="image-20241004120908889" style="zoom:80%;" />
+<img src="assets/image-20241004120908889.png" alt="image-20241004120908889" style="zoom:80%;" />
 
 
 
@@ -999,7 +1094,7 @@ DOM节点：DOM树中每一个**内容**都称之为节点，节点类型包括�
 
 **函数**和通过**var**定义的对象会变成**window**下的属性和方法。
 
-![image-20241004142102820](./asserts/image-20241004142102820.png)
+![image-20241004142102820](assets/image-20241004142102820.png)
 
 
 
@@ -1009,13 +1104,13 @@ DOM节点：DOM树中每一个**内容**都称之为节点，节点类型包括�
 
 也是一种定时器，效果是将函数延时一段时间再执行，**只执行一次**
 
-<img src="./asserts/image-20241004142928880.png" alt="image-20241004142928880" style="zoom:67%;" />
+<img src="assets/image-20241004142928880.png" alt="image-20241004142928880" style="zoom:67%;" />
 
 
 
 清除延时函数
 
-<img src="./asserts/image-20241004143140863.png" alt="image-20241004143140863" style="zoom:67%;" />
+<img src="assets/image-20241004143140863.png" alt="image-20241004143140863" style="zoom:67%;" />
 
 
 
@@ -1039,7 +1134,7 @@ JS会**先执行**执行栈中的**同步任务**，同步任务**执行完毕�
 
 
 
-![image-20241004150857324](./asserts/image-20241004150857324.png)
+![image-20241004150857324](assets/image-20241004150857324.png)
 
 由web Api判断该将那个异步任务推给任务队列
 
@@ -1051,7 +1146,7 @@ JS会**先执行**执行栈中的**同步任务**，同步任务**执行完毕�
 
 可以**修改href**属性实现**跳转页面**
 
-![image-20241004152251413](./asserts/image-20241004152251413.png)
+![image-20241004152251413](assets/image-20241004152251413.png)
 
 
 
@@ -1091,7 +1186,7 @@ location.reload(true)可以**强制刷新页面**
 
 主要**管理历史记录**  实现页面的**前进和后退**
 
-![image-20241004154540048](./asserts/image-20241004154540048.png)
+![image-20241004154540048](assets/image-20241004154540048.png)
 
 
 
@@ -1101,7 +1196,7 @@ location.reload(true)可以**强制刷新页面**
 
 **localStorage**实现首页刷新不**丢失数据**，数据存放在**用户的浏览器**中
 
-![](./asserts/image-20241004160602866.png)
+![](assets/image-20241004160602866.png)
 
 **setItem如果键不存在则创建反之修改**
 
@@ -1123,11 +1218,11 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 定义正则表达式 不需要引号
 
-<img src="./asserts/image-20241004213657422.png" alt="image-20241004213657422" style="zoom:50%;" />
+<img src="assets/image-20241004213657422.png" alt="image-20241004213657422" style="zoom:50%;" />
 
 判断是否匹配 返回布尔值
 
-![image-20241004213906706](./asserts/image-20241004213906706.png)
+![image-20241004213906706](assets/image-20241004213906706.png)
 
 
 
@@ -1157,7 +1252,11 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 /[\u4e00-\u9fa5A-Za-z0-9]/
 ```
 
+匹配wiki百科的引用，注意一定不要忘了()和.需要**转义字符**，\[^\s\\)]用于匹配到下一括号之前的所有内容
 
+```python
+/\(https?:\/\/zh\.wikipedia\.org\/wiki\/[^\s\)]+\)/
+```
 
 
 
@@ -1171,7 +1270,7 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 ## 电梯导航栏
 
-![image-20241005145706562](./asserts/image-20241005145706562.png)
+![image-20241005145706562](assets/image-20241005145706562.png)
 
 
 
@@ -1238,7 +1337,7 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 ## 学生信息管理
 
-![image-20241004133913774](./asserts/image-20241004133913774.png)
+![image-20241004133913774](assets/image-20241004133913774.png)
 
 
 
@@ -1328,7 +1427,7 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 ## 注册页面
 
-![image-20241005121337870](./asserts/image-20241005121337870.png)
+![image-20241005121337870](assets/image-20241005121337870.png)
 
 这里输入有误的实现是使用span 定位到输入框的下面 如果输入有误则填入内容
 
@@ -1448,7 +1547,7 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 ## 登录页面
 
-![image-20241005133733319](./asserts/image-20241005133733319.png)
+![image-20241005133733319](assets/image-20241005133733319.png)
 
 
 
@@ -1507,7 +1606,7 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 ##  放大镜效果
 
-![image-20241005162753189](./asserts/image-20241005162753189.png)
+![image-20241005162753189](assets/image-20241005162753189.png)
 
 
 
@@ -1602,7 +1701,7 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 **就近原则**输出2
 
-<img src="./asserts/image-20241005175132527.png" alt="image-20241005175132527" style="zoom:50%;" />
+<img src="assets/image-20241005175132527.png" alt="image-20241005175132527" style="zoom:50%;" />
 
 
 
@@ -1634,13 +1733,13 @@ sessionStorage**关闭浏览器数据就消失** 用法于localStorage相同
 
 ​	这里p仍然指向对象数据
 
-![image-20241006104244359](./asserts/image-20241006104244359.png)
+![image-20241006104244359](assets/image-20241006104244359.png)
 
 ​	
 
 ​	引用计数无法回收**嵌套引用**的情况
 
-<img src="./asserts/image-20241006104654712.png" alt="image-20241006104654712" style="zoom:67%;" />
+<img src="assets/image-20241006104654712.png" alt="image-20241006104654712" style="zoom:67%;" />
 
 
 
@@ -1677,7 +1776,7 @@ fnn()
 
 实现一个记录函数调用次数的函数 如果令i为全局变量则很容易被修改 **通过获得闭包函数可以保证局部变量不能被随意修改**
 
-![image-20241006111245005](./asserts/image-20241006111245005.png)
+![image-20241006111245005](assets/image-20241006111245005.png)
 
 注意闭包可能会导致**内存泄漏**	
 
@@ -1691,7 +1790,7 @@ fnn()
 
 函数提升——函数**在声明之前就可以被调用**  下述违法因为不提升赋值
 
-<img src="./asserts/image-20241006112829928.png" alt="image-20241006112829928" style="zoom:50%;" />
+<img src="assets/image-20241006112829928.png" alt="image-20241006112829928" style="zoom:50%;" />
 
 
 
@@ -1751,15 +1850,34 @@ function ({data:myData}){..} // 做参数的同时解构
 
 ## for-each
 
-遍历数组的每个元素**并传递给回调函数**，不返回结果
-
-
-
-索引可以**省略**
+遍历数组，不会返回**结果**
 
 ```javascript
-arr.forEach(function(item,index){  
-})
+arr.forEach((element, index) => {
+  console.log(`元素 ${element} 的索引是 ${index}`);
+});
+
+```
+
+
+
+## reduce
+
+reduce的回调函数中第一个参数是**上一次运算的结果**，第二个参数是**当前对象**
+
+除了回调函数，还可以设置**初始值**。设置了初始值则可以从**从数组首部开始执行**，如果省略那么数组首部会作为第一次运算的结果，然后从数组**第二个值**开始 
+
+有的时候初始值没有意义仅仅是为了不跳过第一个元素
+
+```javascript
+arr.reduce(function(上一次结果,当前对象){
+   return 运算逻辑——类似pre+curr.salary
+},初始值)
+
+// 对于arr=[{name:xx,price:100},{name:xx,price:500}...]类型的对象，取出最大的price
+const maxPrice = arr.reduce((max, item) => {
+    return item.price > max ? item.price : max;
+}, 0);
 ```
 
 
@@ -1784,19 +1902,19 @@ arr.forEach(function(item,index){
 
 
 
-<img src="./asserts/image-20241006143817547.png" alt="image-20241006143817547" style="zoom:67%;" />
+<img src="assets/image-20241006143817547.png" alt="image-20241006143817547" style="zoom:67%;" />
 
 
 
 内部的数据通过后端获得的，前端会得到类似如下的数据
 
-<img src="./asserts/image-20241006143854684.png" alt="image-20241006143854684" style="zoom:50%;" />
+<img src="assets/image-20241006143854684.png" alt="image-20241006143854684" style="zoom:50%;" />
 
 
 
 大盒子设置为了flex可以扩展 定义好结构 遍历得到的数据修改innerHtml修改渲染内容 
 
-![image-20241006143909550](./asserts/image-20241006143909550.png)
+![image-20241006143909550](assets/image-20241006143909550.png)
 
 
 
@@ -1828,7 +1946,7 @@ document.querySelector('.list').innerHTML=s
 
 通过函数表达式赋值 该函数的**this会指向调用者**，不要使用**箭头函数** 因为箭头函数的this不是指向调用者
 
-<img src="./asserts/image-20241006180338796.png" style="zoom:67%;" />
+<img src="assets/image-20241006180338796.png" style="zoom:67%;" />
 
 简言之就是一个共享函数，每个实例对象可以使用这个函数且不额外分配内存
 
@@ -1836,7 +1954,7 @@ document.querySelector('.list').innerHTML=s
 
 给数组扩展求和函数
 
-<img src="./asserts/image-20241007102528356.png" alt="image-20241007102528356" style="zoom:67%;" />
+<img src="assets/image-20241007102528356.png" alt="image-20241007102528356" style="zoom:67%;" />
 
 
 
@@ -1844,13 +1962,13 @@ document.querySelector('.list').innerHTML=s
 
 原型为了快速挂载函数会使用**对象赋值**，但是这样操作会导致原型**失去构造函数不知道指向谁**
 
-<img src="./asserts/image-20241007103550761.png" alt="image-20241007103550761" style="zoom:67%;" />
+<img src="assets/image-20241007103550761.png" alt="image-20241007103550761" style="zoom:67%;" />
 
 
 
 需要在**同时指回原型对象**
 
-<img src="./asserts/image-20241007103755925.png" alt="image-20241007103755925" style="zoom:50%;" />
+<img src="assets/image-20241007103755925.png" alt="image-20241007103755925" style="zoom:50%;" />
 
 
 
@@ -1862,7 +1980,7 @@ document.querySelector('.list').innerHTML=s
 
 因此实例化对象可以使用共享的属性和方法
 
-<img src="./asserts/image-20241007104232968.png" alt="image-20241007104232968" style="zoom:50%;" />
+<img src="assets/image-20241007104232968.png" alt="image-20241007104232968" style="zoom:50%;" />
 
 
 
@@ -1874,13 +1992,13 @@ document.querySelector('.list').innerHTML=s
 
 **将公共的属性放到一个对象中 然后赋值给构造函数的原型 注意需要将原型的构造函数指回** 因为实例化对象中对象原型的存在因此可以直接访问公共的属性
 
-![image-20241007110935163](./asserts/image-20241007110935163.png)
+![image-20241007110935163](assets/image-20241007110935163.png)
 
 
 
 如果两个构造函数的原型都继承了一个对象 **修改一个另一个也会受影响** 因为是引用
 
-![image-20241007111442033](./asserts/image-20241007111442033.png)
+![image-20241007111442033](assets/image-20241007111442033.png)
 
 
 
@@ -1896,7 +2014,7 @@ document.querySelector('.list').innerHTML=s
 
 每个对象都会有一个**对象原型** 因此原型中也会有一个对象原型 这个对象原型会指向**最大的对象Object的原型** 而Object的原型也会有对象原型 不过因为没有更大的对象了因此**指向null**
 
-![image-20241007113851118](./asserts/image-20241007113851118.png)
+![image-20241007113851118](assets/image-20241007113851118.png)
 
 
 
@@ -1906,7 +2024,7 @@ document.querySelector('.list').innerHTML=s
 
 **instanceof**运算符用于检测**前者的原型链是否涉及到了后者**
 
-![](./asserts/image-20241007115631269.png)
+![](assets/image-20241007115631269.png)
 
 
 
@@ -1920,7 +2038,7 @@ document.querySelector('.list').innerHTML=s
 
 ## 面向对象思想例子
 
-<img src="./asserts/image-20241007125103623.png" alt="image-20241007125103623" style="zoom:50%;" />
+<img src="assets/image-20241007125103623.png" alt="image-20241007125103623" style="zoom:50%;" />
 
 
 
@@ -1978,7 +2096,7 @@ document.querySelector('.list').innerHTML=s
 
 **浅拷贝会将简单数据类型复制一份，而复杂数据类型则会把地址复制一份**
 
-<img src="./asserts/image-20241007134055637.png" alt="image-20241007134055637" style="zoom:67%;" />
+<img src="assets/image-20241007134055637.png" alt="image-20241007134055637" style="zoom:67%;" />
 
 
 
@@ -1992,7 +2110,7 @@ Lodash需要下载相应的js文件 通过<script src="lodash.js"></script>导�
 
 如下所示的方式进行深拷贝
 
-![image-20241007140749918](./asserts/image-20241007140749918.png)
+![image-20241007140749918](assets/image-20241007140749918.png)
 
 
 
@@ -2008,7 +2126,7 @@ Lodash需要下载相应的js文件 通过<script src="lodash.js"></script>导�
 
 或者三件套
 
-![image-20241007142500431](./asserts/image-20241007142500431.png)
+![image-20241007142500431](assets/image-20241007142500431.png)
 
 
 
@@ -2032,7 +2150,7 @@ bind**不会调用函数**，**new_fn=fn.bind(new_this)**返回一个改变了th
 
 
 
-<img src="./asserts/image-20241007153536971.png" alt="image-20241007153536971" style="zoom:67%;" />
+<img src="assets/image-20241007153536971.png" alt="image-20241007153536971" style="zoom:67%;" />
 
 
 
