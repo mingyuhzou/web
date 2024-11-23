@@ -197,7 +197,7 @@ Object.defineProperty(obj, prop, descriptor) // 要操作的对象 设置的属�
 
 
 
-# 事件处理
+# 事件绑定
 
 事件的基本使用：
 
@@ -208,6 +208,14 @@ Object.defineProperty(obj, prop, descriptor) // 要操作的对象 设置的属�
 + 回调函数的默认参数是**event对象**，如果**传递了参数就不能获取到event对象**，需要在回调函数调用的位置传递一个**占位符$event**
 
 <img src="assets/image-20241025144426624-1729994679239-9.png" alt="image-20241025144426624" style="zoom:50%;" />
+
+
+
+给子组件绑定事件需要用**native修饰符**，否则会被当做**自定义事件**，这个事件会被绑定到组件结构**最外部的div**中
+
+![{087B5CD9-A40B-4865-BDFD-EE116B069FB5}](./assets/{087B5CD9-A40B-4865-BDFD-EE116B069FB5}.png)
+
+
 
 
 
@@ -611,8 +619,8 @@ v-once指令所在的结构在初次渲染之后就是静态内容了，元素�
 + 虚拟DOM转换为真实DOM，成功挂载到页面上，此时可以开启**定时器**，**axios请求**，**绑定自定义事件，订阅消息**，这里所做的操作只会**执行一次**，mounted()
 + 将要更新，beforeUpdate()
 + 更新完毕，update()
-+ 将要销毁，此时可以访问到数据和方法，但是对数据的更新是**不会显示到页面**上的，**关闭定时器取消订阅等**，beforeDestroy()
-+ 销毁完毕，destroyed()
++ 将要销毁，此时可以访问到数据和方法，但是对数据的更新是**不会显示到页面**上的，**关闭定时器取消订阅等**，，beforeDestroy()
++ 销毁完毕，实例对象的销毁是不会影响到**绑定到原生DOM上的事件** 事件仍然会触发但不会**回显**，destroyed()
 
 
 
@@ -889,268 +897,97 @@ Vue提供了一种快速操作DOM元素的方法，类似于CSS选择器的效�
 
 
 
-## 输入框
+# 组件自定义事件
 
-todos(储存待办事项的数组)原本应该放在itemlists中，但目前为止没有学到组件间通信，所以输入框组件无法修改**并列组件**中内容，这里将todos存放到app中，app将todos**共享**给(props)itemList中，以此来实现**组件间交互**，在app中实现一个**操作todos的方法**然后**传给inputBox组件**，这样就能在inputBox组件就可以添加数据。
+在组件上绑定自定义事件还是使用事件语法:**v-on或者@**，事件名自定义，这个事件会被绑定到**组件实例对象**上，注意不是组件上，一旦事件触发则会调用**指定的函数**，可以实现子组件给父组件**传递数据**，因为回调函数在父组件中
 
-```vue
-<template>
-    <div class="todo-header">
-        <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="title" @keyup.enter="addEle"/>
-      </div> 
-</template>
-    
-<script >
-    import {nanoid} from 'nanoid'
-    export default{
-        name:'inputBox',
-        data(){
-            return {
-                // 通过双向数据绑定获取键盘输入
-                title:''
-            }
-        },
-        props:["receive"],
-        methods:{
-            addEle(){
-                // 简单判断是否有输入内容
-                if(!this.title) return 
-                
-                //  根据输入生成一个todo对象，这里因为没有后端的所以ID序列号只能自己定义，通过nanoid(uuid的简化版，可					  以生成唯一序列号)实现
-                const obj={id:nanoid(),title:this.title,completed:false}
+<img src="./assets/{5A6673B9-5082-4CFC-B177-8DFE9E8FE892}.png" alt="{5A6673B9-5082-4CFC-B177-8DFE9E8FE892}" style="zoom:150%;" />
 
-                // 调用函数添加数据
-                this.receive(obj)
-
-                // 注意清空数据
-                this.title=''
-            }
-        }
-    }
-</script>
-    
-<style scoped>
-    /*header*/
-    .todo-header input {
-        width: 560px;
-        height: 28px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 4px 7px;
-    }
-
-    .todo-header input:focus {
-        outline: none;
-        border-color: rgba(82, 168, 236, 0.8);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
-    }
-
-</style>
-```
+![{C19313B7-C1A5-4960-A29E-216BCC51ECCF}](./assets/{C19313B7-C1A5-4960-A29E-216BCC51ECCF}.png)
 
 
 
-## 列表
+在组件的内部使用**\$emit**触发自身的自定义事件，可以**传递参数**
+
+![{A3F228DC-7923-4E3E-B79C-B805537E66D2}](./assets/{A3F228DC-7923-4E3E-B79C-B805537E66D2}.png)
 
 
 
-```vue
-<template>
-    <div>
-    <ul class="todo-main">
-        <!-- v-for指令列表渲染 将键值绑定为唯一的id todo对象和checkTodo方法用props传入给item组件 App想传递函数给item目前只能层层传递-->
-        <itemElement v-for="todo in todos" :key="todo.id" :obj="todo" :checkTodo="checkTodo" :deleteTodo="deleteTodo" />
-    </ul>  
-    </div>
-</template>
-    
-<script >
-    import itemElement from './Item.vue';
-    export default{
-        name:'itemList',
 
-        props:["todos", "checkTodo","deleteTodo"],
-        components:{itemElement}
-    }
-</script>
-    
-<style scoped>
-    /*main*/
-    .todo-main {
-        margin-left: 0px;
-        border: 1px solid #ddd;
-        border-radius: 2px;
-        padding: 0px;
-    }
 
-    .todo-empty {
-        height: 40px;
-        line-height: 40px;
-        border: 1px solid #ddd;
-        border-radius: 2px;
-        padding-left: 5px;
-        margin-top: 10px;
-    }
-</style>
-```
+另一种绑定自定义事件的方式是**使用ref标签**获取组件实例对象，然后再这个对象上调用**$on**
+
+![{013C6399-A95B-471B-8AE9-C39BC2946E6D}](./assets/{013C6399-A95B-471B-8AE9-C39BC2946E6D}.png)
+
+![{118A1632-B463-403F-AF50-2DACECB3D562}](./assets/{118A1632-B463-403F-AF50-2DACECB3D562}.png)
 
 
 
-## item
+注意如果不想定义一个函数，在绑定回调函数时，需要用箭头函数
 
-```vue
-<template>
-    <li>
-        <label>         
-            <!-- 绑定change事件 勾选时会触发handleCheck，handleCheck内调用App中的checkTodo来修改值-->
-            <input type="checkbox" :checked="obj.completed" @change="handleCheck(obj.id)"/>
-             <span>{{obj.title}}</span>
-        </label>
-        <button class="btn btn-danger" @click="deleteItem(obj.id)" >删除</button>
-    </li>
-</template>
-    
-<script >
-    export default{
-        name:'li-item',
-        props:['obj','checkTodo','deleteTodo'],
-        methods:{
-            handleCheck(id){
-                this.checkTodo(id)
-            },
-            deleteItem(id){
-                if(confirm('确定删除吗?')){
-                    this.deleteTodo(id)
-                }
-            }
-        },
-        mounted(){
-            console.log(this.obj)
-        }
-    }
-</script>
-    
-<style scoped>
-    /*item*/
-    li {
-        list-style: none;
-        height: 36px;
-        line-height: 36px;
-        padding: 0 5px;
-        border-bottom: 1px solid #ddd;
-    }
+![{F3BE36EF-4BE7-4A71-9F3E-EE90B5934B58}](./assets/{F3BE36EF-4BE7-4A71-9F3E-EE90B5934B58}.png)
 
-    li label {
-        float: left;
-        cursor: pointer;
-    }
+因为普通函数中的**this**会指向**组件实例对象**，而不是**自身**
 
-    li label li input {
-        vertical-align: middle;
-        margin-right: 6px;
-        position: relative;
-        top: -1px;
-    }
 
-    li button {
-        float: right;
-        display: none;
-        margin-top: 3px;
-    }
 
-    li:before {
-        content: initial;
-    }
 
-    li:last-child {
-        border-bottom: none;
-    }
-    li:hover{
-        background-color: #ccc;
-    }
-    li:hover button{
-        display: block;
-    }
 
-</style>
-```
+如果事件只想**触发一次**，可以使用**事件修饰符**或者在绑定时用**\$once**
 
-## 底部
 
-```vue
-<template>
-    <!-- 如果没有任务就不需要显示底部 -->
-    <div class="todo-footer" v-show="total">
-            <label>
-               <!-- 如果已完成和总的任务数相等那么就勾选 -->
-              <!-- <input type="checkbox" :checked="isTotal" @change="selectAll"/> -->
-              <input type="checkbox" v-model="isTotal"/>
 
-            </label>
-            <span>
-              <span>已完成{{doneTotal}}</span> / 全部{{total}}
-            </span>
-            <button class="btn btn-danger" @click="clearAll">清除已完成任务</button>
-          </div>
-</template>
-    
-<script >
-    export default{
-        name:'bottomButton',
-        props:['todos',"selectAlltodo","deleteAll"],
-        computed:{
-            // 用计算属性求解已完成的任务数，可以用reduce遍历累计求和
-            doneTotal(){
-                return this.todos.reduce((pre,cur) =>pre+(cur.completed?1:0),0)
-            },
-            // 计算属性判断已完成和总的任务数是否相等
-            isTotal:{
-                get(){
-                    return this.doneTotal === this.todos.length && this.todos.length > 0
-                },
-                set(e){
-                    this.selectAlltodo(e)
-                }
-            },
-            total(){
-                return this.todos.length
-            }
-        },
-        methods:{
-            clearAll() {
-                this.deleteAll()
-            }
-        }
-    }
-</script>
-    
-<style scoped>
-    /*footer*/
-    .todo-footer {
-        height: 40px;
-        line-height: 40px;
-        padding-left: 6px;
-        margin-top: 5px;
-    }
+解绑使用**$off**，如果要解绑**多个**自定义事件，参数可以传入**数组**，**不传参则解绑所有**
 
-    .todo-footer label {
-        display: inline-block;
-        margin-right: 20px;
-        cursor: pointer;
-    }
+![{03B0EA77-ECF0-4B91-AB8E-7BE6B8F4324F}](./assets/{03B0EA77-ECF0-4B91-AB8E-7BE6B8F4324F}.png)
 
-    .todo-footer label input {
-        position: relative;
-        top: -1px;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
 
-    .todo-footer button {
-        float: right;
-        margin-top: 5px;
-    }
-</style>
-```
+
+# 事件总线
+
+**可以实现任意组件间通信**
+
+借助**组件实例对象可以访问到Vue原型上的属性和方法**的特性，在**Vue原型**上定义一个**Vue对象**，这样各个组件都可以**访问到**这个对象。组件实例对象在这个对象上绑定自定义事件的**回调函数是在自己身上**的，其他组件实例对象**触发这个自定义事件**时会触发**对应的回调函数**，由此将实现了不同组件间的通信。
+
+一般的定义方法，命名为$bus
+
+![{F7693CFE-B7F3-4803-A613-96737B072BBD}](./assets/{F7693CFE-B7F3-4803-A613-96737B072BBD}.png)
+
+
+
+
+
+绑定事件，传入自身的回调函数
+
+![{5E97AEBB-5BC2-4346-A6F8-3810CB6CCDB3}](./assets/{5E97AEBB-5BC2-4346-A6F8-3810CB6CCDB3}.png)
+
+
+
+触发自定义事件
+
+![{F35745B3-3F93-443D-8601-CBF0AD78A860}](./assets/{F35745B3-3F93-443D-8601-CBF0AD78A860}.png)
+
+
+
+在绑定自定义事件时也要写好解绑函数
+
+![{56E8B630-373F-4776-9BD2-F38B3EA4924E}](./assets/{56E8B630-373F-4776-9BD2-F38B3EA4924E}.png)
+
+
+
+
+
+# 消息订阅与发布
+
+
+
+
+
+
+
+
+
+
+
+
 
